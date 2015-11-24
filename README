@@ -1,0 +1,9 @@
+This is the README file for the HpiInfo package.
+
+This software comes with ABSOLUTELY NO WARRANTY.  See the file 'COPYING' for
+details.
+
+See the file 'INSTALL' for instructions on building HpiInfo from source.
+
+HpiInfo is a utility for monitoring operation of AudioScience's high-end
+line of professional audio cards.
