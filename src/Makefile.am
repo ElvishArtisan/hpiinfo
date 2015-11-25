@@ -27,7 +27,7 @@ MOC = @MOC@
 moc_%.cpp:	%.h
 	$(MOC) $< -o $@
 
-bin_PROGRAMS = hpiinfo
+sbin_PROGRAMS = hpiinfo
 
 dist_hpiinfo_SOURCES = change_mode.cpp change_mode.h\
                        cmdswitch.cpp cmdswitch.h\

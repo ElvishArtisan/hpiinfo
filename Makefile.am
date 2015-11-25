@@ -20,7 +20,9 @@
 ##   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 ##
 
-SUBDIRS = src
+SUBDIRS = icons\
+          src\
+          xdg
 
 rpm:	dist
 	cp hpiinfo-$(VERSION).tar.gz $(HOME)/rpmbuild/SOURCES/

@@ -34,10 +34,13 @@
 #include "change_mode.h"
 #include "virtdetails.h"
 
+#include "../icons/hpiinfo-16x16.xpm"
+
 MainWidget::MainWidget(QWidget *parent)
   :QWidget(parent)
 {
   setWindowTitle(tr("HPIInfo")+" v"+VERSION);
+  setWindowIcon(QPixmap(hpiinfo_16x16_xpm));
 
   //
   // Fix the Window Size

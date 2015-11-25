@@ -84,7 +84,9 @@ else
 fi 
 
 AC_CONFIG_FILES([ \
+    icons/Makefile \
     src/Makefile \
+    xdg/Makefile \
     hpiinfo.spec \
     Makefile ])
 AC_OUTPUT()

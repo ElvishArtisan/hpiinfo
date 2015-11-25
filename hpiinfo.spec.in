@@ -1,56 +1,26 @@
-## glasscoder.spec.in
+## padpoint.spec.in
 ##
-##    Minimalist Audio Streaming Encoder
+##    PadPoint Program Associated Data Processor
+##    Copyright (C) 2012  Fred Gleason <fredg@paravelsystems.com>
 ##
-##    Copyright (C) 2014-2015  Fred Gleason <fredg@paravelsystems.com>
+##      $Id: padpoint.spec.in,v 1.1 2012/08/23 23:25:21 pcvs Exp $
 ##
-##    This program is free software; you can redistribute it and/or modify
-##    it under the terms of version 2 of the GNU General Public License as
-##    published by the Free Software Foundation;
-##
-##    This program is distributed in the hope that it will be useful,
-##    but WITHOUT ANY WARRANTY; without even the implied warranty of
-##    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-##    GNU General Public License for more details.
-##
-##    You should have received a copy of the GNU General Public License
-##    along with this program; if not, write to the Free Software
-##    Foundation, Inc., 59 Temple Place, Suite 330, 
-##    Boston, MA  02111-1307  USA
+##    All Rights Reserved.
 ##
 
-Summary: Minimalist Audio Streaming Encoder
-Name: glasscoder
+Summary: Program Associated Data Processor
+Name: padpoint
 Version: @VERSION@
 Release: @RPM_RELEASE@%{?dist}
-License: GPLv2
+License: Proprietary
 Packager: Fred Gleason <fredg@paravelsystems.com>
 Group: Productivity/Multimedia/Other
-Source: %{name}-@VERSION@.tar.gz
-BuildRequires: qt-devel libsamplerate-devel libsndfile-devel alsa-lib-devel hpklinux-devel
-BuildRoot: /var/tmp/%{name}-@VERSION@
-Requires: curl
+Source: padpoint-@VERSION@.tar.gz
+BuildRoot: /var/tmp/padpoint-@VERSION@
 
 %description
-Glasscoder is a live audio encoder intended for use with Shoutcast and Icecast
-streaming servers as well as HTTP Live Streams [HLS].  It can source audio
-from ALSA, JACK and AudioScience HPI devices and is capable of generating live
-audio streams in a variety of formats. It is controlled completely from the
-command-line, with no configuration files or GUI required.
-
-
-%package gui
-Summary: GlassGui control applet for GlassCoder
-Group: Productivity/Multimedia/Other
-Requires: glasscoder
-
-%description gui
-GlassGui is a control applet for driving the GlassCoder audio streaming
-encoder.  It provides a complete point-and-click interface for setting
-all of the GlassCoder parameters and can be used directly to instantiate an
-actual instance of GlassCoder or to generate a command-line invocation that
-can copy/pasted into another environment.
-
+PadPoint is a processor for modifying and distributing Program Associated
+Data (PAD).
 
 %prep
 
@@ -59,50 +29,104 @@ can copy/pasted into another environment.
 
 
 %build
-%configure
+./configure --prefix=@LOCAL_PREFIX@
 make
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install DESTDIR=$RPM_BUILD_ROOT
+
+mkdir -p $RPM_BUILD_ROOT%{_libdir}
+cp lib/.libs/libpadpoint-@VERSION@.so $RPM_BUILD_ROOT%{_libdir}/
+ln -s %{_libdir}/libpadpoint-@VERSION@.so $RPM_BUILD_ROOT%{_libdir}/libpadpoint.so
+
+mkdir -p $RPM_BUILD_ROOT%{_sbindir}
+cp padpoint/.libs/padpoint $RPM_BUILD_ROOT%{_sbindir}/
+
+mkdir -p $RPM_BUILD_ROOT%{_sbindir}
+cp padpointd/.libs/padpointd $RPM_BUILD_ROOT%{_sbindir}/
+
+mkdir -p $RPM_BUILD_ROOT/etc/init.d
+cp rc.padpointd $RPM_BUILD_ROOT/etc/init.d/padpointd
+
+mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/16x16/apps
+cp icons/padpoint-16x16.png $RPM_BUILD_ROOT@LOCAL_PREFIX@/share/icons/hicolor/16x16/apps/padpoint.png
+mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/22x22/apps
+cp icons/padpoint-22x22.png $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/22x22/apps/padpoint.png
+mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/32x32/apps
+cp icons/padpoint-32x32.png $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/32x32/apps/padpoint.png
+mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/48x48/apps
+cp icons/padpoint-48x48.png $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/48x48/apps/padpoint.png
+
+mkdir -p $RPM_BUILD_ROOT@prefix@/share/applications
+cp xdg/padpoint_padpoint.desktop $RPM_BUILD_ROOT@prefix@/share/applications/
+mkdir -p $RPM_BUILD_ROOT/etc/pam.d
+cp xdg/padpoint-root-pam $RPM_BUILD_ROOT/etc/pam.d/padpoint-root
+mkdir -p $RPM_BUILD_ROOT/etc/security/console.apps
+cp xdg/padpoint-root-consolehelper $RPM_BUILD_ROOT/etc/security/console.apps/padpoint-root
+ln -s /usr/bin/consolehelper $RPM_BUILD_ROOT%{_sbindir}/padpoint-root
 
 %post
+ldconfig
+if test "@DISTRO@" = "suse" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}
+fi
+if test "@DISTRO@" = "redhat" ; then
+  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
+fi
+if test ! -e /etc/padpoint.conf ; then
+  cp $PACKAGE_DOC_DIR/padpoint.conf-sample /etc/padpoint.conf
+fi
+/etc/init.d/padpointd restart
+if test "@DISTRO@" = "redhat" ; then
+  chkconfig --add padpointd
+  chkconfig --levels 2345 padpointd on
+fi
+exit 0
 
+%preun
+if test "$1" = "0" ; then
+  /etc/init.d/padpointd stop
+  if test "@DISTRO@" = "suse" ; then
+    insserv -r -d -f /etc/init.d/padpointd
+  fi
+  if test "@DISTRO@" = "redhat" ; then
+    chkconfig --levels 2345 padpointd off
+    chkconfig --del padpointd
+  fi
+fi
+exit 0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-
 %files
 %defattr(-,root,root)
-%{_bindir}/glasscoder
-%{_mandir}/man1/glasscoder.1.gz
-%{_mandir}/man1/glassgui.1.gz
+%{_libdir}/libpadpoint-@VERSION@.so
+%{_libdir}/libpadpoint.so
+%{_sbindir}/padpoint
+%{_sbindir}/padpoint-root
+%{_sbindir}/padpointd
+/etc/init.d/padpointd
+@prefix@/share/icons/hicolor/16x16/apps/padpoint.png
+@prefix@/share/icons/hicolor/22x22/apps/padpoint.png
+@prefix@/share/icons/hicolor/32x32/apps/padpoint.png
+@prefix@/share/icons/hicolor/48x48/apps/padpoint.png
+@prefix@/share/applications/padpoint_padpoint.desktop
+/etc/pam.d/padpoint-root
+/etc/security/console.apps/padpoint-root
+
 %doc AUTHORS
 %doc ChangeLog
 %doc COPYING 
+%doc docs/DESTINATIONS.txt
+%doc INSTALL 
 %doc NEWS 
 %doc README 
-%doc conf/httpd/hls.conf
-%doc conf/httpd/hls_methods.pl
-%doc conf/httpd/hls.passwd
-%doc conf/httpd/README.httpd
-
-%files gui
-%{_bindir}/glassgui
-%{_datadir}/applications/glassgui.desktop
-%{_datadir}/icons/hicolor/16x16/apps/glasscoder.png
-%{_datadir}/icons/hicolor/22x22/apps/glasscoder.png
-%{_datadir}/icons/hicolor/48x48/apps/glasscoder.png
+%doc docs/PadPoint.lua
+%doc docs/SOURCES.txt
+%doc padpoint.conf-sample
 
 %changelog
-* Wed Aug 26 2015 Fred Gleason <fredg@paravelsystems.com>
--- Added a 'gui' subpackage.
-* Tue Aug 11 2015 Fred Gleason <fredg@paravelsystems.com>
--- Added a curl(1) dependency.
--- Added HLS httpd example configuration.
-* Thu Jun 10 2014 Fred Gleason <fredg@paravelsystems.com>
--- Removed the 'libshout-devel' and 'lame-devel' build dependencies.
-* Tue Feb 18 2014 Fred Gleason <fredg@paravelsystems.com>
--- Initial RPM creation.
+* @RPM_DATESTAMP@ Fred Gleason <fredg@paravelsystems.com> - @VERSION@-@RPM_RELEASE@
+-- Autogenerated from build tree.
