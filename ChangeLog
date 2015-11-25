@@ -3,3 +3,5 @@
 2015-11-25 Fred Gleason <fredg@paravelsystems.com>
 	* Added an icon in 'icons/'.
 	* Added desktop entries in 'xdg/'.
+2015-11-25 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'make rpm' target.

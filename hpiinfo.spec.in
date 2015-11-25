@@ -1,26 +1,37 @@
-## padpoint.spec.in
+## hpiinfo.spec.in
 ##
-##    PadPoint Program Associated Data Processor
-##    Copyright (C) 2012  Fred Gleason <fredg@paravelsystems.com>
+##   (C) Copyright 2015 Fred Gleason <fredg@paravelsystems.com>
 ##
-##      $Id: padpoint.spec.in,v 1.1 2012/08/23 23:25:21 pcvs Exp $
+##   This program is free software; you can redistribute it and/or modify
+##   it under the terms of the GNU General Public License version 2 as
+##   published by the Free Software Foundation.
 ##
-##    All Rights Reserved.
+##   This program is distributed in the hope that it will be useful,
+##   but WITHOUT ANY WARRANTY; without even the implied warranty of
+##   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##   GNU General Public License for more details.
+##
+##   You should have received a copy of the GNU General Public
+##   License along with this program; if not, write to the Free Software
+##   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 ##
 
-Summary: Program Associated Data Processor
-Name: padpoint
+Summary: Configuration applet for AudioScience audio adapters
+Name: hpiinfo
 Version: @VERSION@
 Release: @RPM_RELEASE@%{?dist}
-License: Proprietary
+License: GPLv2
 Packager: Fred Gleason <fredg@paravelsystems.com>
 Group: Productivity/Multimedia/Other
-Source: padpoint-@VERSION@.tar.gz
-BuildRoot: /var/tmp/padpoint-@VERSION@
+Source: %{name}-%{version}.tar.gz
+BuildRoot: /var/tmp/%{name}-%{version}
 
 %description
-PadPoint is a processor for modifying and distributing Program Associated
-Data (PAD).
+An applet for the configuration and monitoring of AudioScience's
+[http://www.audioscience.com] line of high-end audio adapters (sound cards).
+HPIInfo can be used to change the operating mode of adapters as well as
+for monitoring a variety of operating parameters of an adapter in real
+time.
 
 %prep
 
@@ -29,104 +40,41 @@ Data (PAD).
 
 
 %build
-./configure --prefix=@LOCAL_PREFIX@
+%configure
 make
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
 
-mkdir -p $RPM_BUILD_ROOT%{_libdir}
-cp lib/.libs/libpadpoint-@VERSION@.so $RPM_BUILD_ROOT%{_libdir}/
-ln -s %{_libdir}/libpadpoint-@VERSION@.so $RPM_BUILD_ROOT%{_libdir}/libpadpoint.so
-
-mkdir -p $RPM_BUILD_ROOT%{_sbindir}
-cp padpoint/.libs/padpoint $RPM_BUILD_ROOT%{_sbindir}/
-
-mkdir -p $RPM_BUILD_ROOT%{_sbindir}
-cp padpointd/.libs/padpointd $RPM_BUILD_ROOT%{_sbindir}/
-
-mkdir -p $RPM_BUILD_ROOT/etc/init.d
-cp rc.padpointd $RPM_BUILD_ROOT/etc/init.d/padpointd
-
-mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/16x16/apps
-cp icons/padpoint-16x16.png $RPM_BUILD_ROOT@LOCAL_PREFIX@/share/icons/hicolor/16x16/apps/padpoint.png
-mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/22x22/apps
-cp icons/padpoint-22x22.png $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/22x22/apps/padpoint.png
-mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/32x32/apps
-cp icons/padpoint-32x32.png $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/32x32/apps/padpoint.png
-mkdir -p $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/48x48/apps
-cp icons/padpoint-48x48.png $RPM_BUILD_ROOT@prefix@/share/icons/hicolor/48x48/apps/padpoint.png
-
-mkdir -p $RPM_BUILD_ROOT@prefix@/share/applications
-cp xdg/padpoint_padpoint.desktop $RPM_BUILD_ROOT@prefix@/share/applications/
-mkdir -p $RPM_BUILD_ROOT/etc/pam.d
-cp xdg/padpoint-root-pam $RPM_BUILD_ROOT/etc/pam.d/padpoint-root
-mkdir -p $RPM_BUILD_ROOT/etc/security/console.apps
-cp xdg/padpoint-root-consolehelper $RPM_BUILD_ROOT/etc/security/console.apps/padpoint-root
-ln -s /usr/bin/consolehelper $RPM_BUILD_ROOT%{_sbindir}/padpoint-root
-
-%post
-ldconfig
-if test "@DISTRO@" = "suse" ; then
-  PACKAGE_DOC_DIR=%_docdir/%{name}
-fi
-if test "@DISTRO@" = "redhat" ; then
-  PACKAGE_DOC_DIR=%_docdir/%{name}-@VERSION@
-fi
-if test ! -e /etc/padpoint.conf ; then
-  cp $PACKAGE_DOC_DIR/padpoint.conf-sample /etc/padpoint.conf
-fi
-/etc/init.d/padpointd restart
-if test "@DISTRO@" = "redhat" ; then
-  chkconfig --add padpointd
-  chkconfig --levels 2345 padpointd on
-fi
-exit 0
-
-%preun
-if test "$1" = "0" ; then
-  /etc/init.d/padpointd stop
-  if test "@DISTRO@" = "suse" ; then
-    insserv -r -d -f /etc/init.d/padpointd
-  fi
-  if test "@DISTRO@" = "redhat" ; then
-    chkconfig --levels 2345 padpointd off
-    chkconfig --del padpointd
-  fi
-fi
-exit 0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files
-%defattr(-,root,root)
-%{_libdir}/libpadpoint-@VERSION@.so
-%{_libdir}/libpadpoint.so
-%{_sbindir}/padpoint
-%{_sbindir}/padpoint-root
-%{_sbindir}/padpointd
-/etc/init.d/padpointd
-@prefix@/share/icons/hicolor/16x16/apps/padpoint.png
-@prefix@/share/icons/hicolor/22x22/apps/padpoint.png
-@prefix@/share/icons/hicolor/32x32/apps/padpoint.png
-@prefix@/share/icons/hicolor/48x48/apps/padpoint.png
-@prefix@/share/applications/padpoint_padpoint.desktop
-/etc/pam.d/padpoint-root
-/etc/security/console.apps/padpoint-root
 
+%post
+if [ -x %{_bindir}/gtk-update-icon-cache ] ; then
+  %{_bindir}/gtk-update-icon-cache -f --quiet %{_datadir}/icons/hicolor || :
+fi
+
+%files
+/etc/pam.d/hpiinfo-root
+/etc/security/console.apps/hpiinfo-root
+%{_sbindir}/hpiinfo
+%{_bindir}/hpiinfo-root
+%{_datadir}/applications/hpiinfo.desktop
+%{_datadir}/icons/hicolor/16x16/apps/hpiinfo.png
+
+
+%defattr(-,root,root)
 %doc AUTHORS
 %doc ChangeLog
-%doc COPYING 
-%doc docs/DESTINATIONS.txt
-%doc INSTALL 
+%doc COPYING
 %doc NEWS 
 %doc README 
-%doc docs/PadPoint.lua
-%doc docs/SOURCES.txt
-%doc padpoint.conf-sample
+
 
 %changelog
-* @RPM_DATESTAMP@ Fred Gleason <fredg@paravelsystems.com> - @VERSION@-@RPM_RELEASE@
--- Autogenerated from build tree.
+* Wed Nov 25 2015 Fred Gleason <fredg@paravelsystems.com>
+-- Initial RPM creation.

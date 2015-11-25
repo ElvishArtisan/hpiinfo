@@ -26,13 +26,14 @@ install-exec-am:
 	cp hpiinfo-root-pam $(DESTDIR)/etc/pam.d/hpiinfo-root
 	mkdir -p $(DESTDIR)/etc/security/console.apps
 	cp hpiinfo-root-consolehelper $(DESTDIR)/etc/security/console.apps/hpiinfo-root
-	rm -f $(DESTDIR)$(prefix)/sbin/hpiinfo-root
-	ln -s /usr/bin/consolehelper $(DESTDIR)$(prefix)/sbin/hpiinfo-root
+	rm -f $(DESTDIR)$(prefix)/bin/hpiinfo-root
+	mkdir -p $(DESTDIR)$(prefix)/bin
+	ln -s /usr/bin/consolehelper $(DESTDIR)$(prefix)/bin/hpiinfo-root
 
 uninstall-local:	
 	rm -f $(DESTDIR)@prefix@/share/applications/hpiinfo.desktop
 	rm -f $(DESTDIR)/etc/security/console.apps/hpiinfo-root
-	rm -f $(DESTDIR)$(prefix)/sbin/hpiinfo-root
+	rm -f $(DESTDIR)$(prefix)/bin/hpiinfo-root
 
 EXTRA_DIST = hpiinfo.desktop\
              hpiinfo-root-consolehelper\
