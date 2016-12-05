@@ -5,3 +5,5 @@
 	* Added desktop entries in 'xdg/'.
 2015-11-25 Fred Gleason <fredg@paravelsystems.com>
 	* Added a 'make rpm' target.
+2016-12-05 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 1.0.0.
