@@ -1,2 +1,3 @@
 USER=root
 PROGRAM=/usr/sbin/hpiinfo
+SESSION=true
