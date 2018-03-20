@@ -132,12 +132,6 @@ ChangeMode::ChangeMode(unsigned short card,unsigned short type,int mode,
 	str=QString(tr("Unknown"));
 	change_mode_box->insertItem(-1,"  "+str+
 				    QString().sprintf("[MODE=%u]\n",i),i);
-	/*
-	  change_mode_box->
-	  insertItem(QString().sprintf("  %s [MODE=%u]\n",
-	  (const char *)str.toUTf8(),
-	  (unsigned)i));
-	*/
 	break;
       }
     }

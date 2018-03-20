@@ -2,7 +2,7 @@
 //
 // A Qt-based application for display information on ASI cards.
 //
-//   (C) Copyright 2002-2014 Fred Gleason <fredg@paravelsystems.com>
+//   (C) Copyright 2002-2018 Fred Gleason <fredg@paravelsystems.com>
 //
 //   This program is free software; you can redistribute it and/or modify
 //   it under the terms of the GNU General Public License version 2 as
@@ -251,10 +251,10 @@ QSizePolicy MainWidget::sizePolicy() const
 }
 
 
-void MainWidget::nameActivatedData(int id)
+void MainWidget::nameActivatedData(int n)
 {
   QString str;
-  int card=name_map[id];
+  int card=info_name_box->itemData(info_name_box->currentIndex()).toInt();
   info_index_label->
     setText(QString().sprintf("%u",(unsigned)hpi_indexes[card]+1));
   info_serial_label->
@@ -355,7 +355,7 @@ void MainWidget::nameActivatedData(int id)
 
 void MainWidget::changeModeData()
 {
-  int card=name_map[info_name_box->currentIndex()];
+  int card=info_name_box->itemData(info_name_box->currentIndex()).toInt();
   int mode;
   QString str;
   hpi_err_t hpi_err;
@@ -430,9 +430,9 @@ void MainWidget::LoadAdapters()
     hpi_serial[i]=0;
     hpi_mode[i]=0;
     if(hpi_type[i]!=0) {
-      info_name_box->insertItem(-1,QString().sprintf("AudioScience %X [%d]",
-						  hpi_type[i],i+1));
-      name_map[info_name_box->count()-1]=i;
+      info_name_box->insertItem(info_name_box->count(),
+				QString().sprintf("AudioScience %X [%d]",
+						  hpi_type[i],i+1),info_name_box->count());
       HpiErr(HPI_AdapterOpen(NULL,hpi_indexes[i]),"HPI_AdapterOpen");
       HpiErr(HPI_AdapterGetInfo(NULL,hpi_indexes[i],&hpi_ostreams[i],&hpi_istreams[i],
 				&hpi_card_version[i],hpi_serial+i,
@@ -475,7 +475,6 @@ int main(int argc,char *argv[])
   // Start Event Loop
   //
   MainWidget *w=new MainWidget(NULL);
-  //  a.setMainWidget(w);
   w->setGeometry(QRect(QPoint(0,0),w->sizeHint()));
   w->show();
   return a.exec();

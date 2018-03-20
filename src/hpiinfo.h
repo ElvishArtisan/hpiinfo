@@ -72,7 +72,6 @@ class MainWidget : public QWidget
   QPushButton *info_changemode_button;
   uint32_t hpi_version;
   QString hpi_name[HPI_MAX_ADAPTERS];
-  int name_map[HPI_MAX_ADAPTERS];
   uint32_t hpi_indexes[HPI_MAX_ADAPTERS];
   uint16_t hpi_ostreams[HPI_MAX_ADAPTERS];
   uint16_t hpi_istreams[HPI_MAX_ADAPTERS];
