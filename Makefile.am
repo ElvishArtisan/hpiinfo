@@ -54,6 +54,7 @@ DISTCLEANFILES = hpiinfo.spec\
 MAINTAINERCLEANFILES = *~\
                        *.tar.gz\
                        aclocal.m4\
+                       compile\
                        config.guess\
                        config.status\
                        config.sub\
