@@ -1,9 +1,17 @@
 .deps
 *~
+*.buildinfo
+*.changes
+*.ddeb
+*.deb
+*.dsc
 *.o
 *.spec
+*.tar.gz
+*.tar.xz
 aclocal.m4
-autom4te.cache/
+autom4te.cache
+build_debs.sh
 compile
 config.log
 config.status
@@ -14,5 +22,6 @@ Makefile
 Makefile.in
 missing
 moc_*
+debian/changelog
 src/hpiinfo
 xdg/install_usermode.sh
