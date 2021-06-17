@@ -30,3 +30,5 @@
 	* Added 'compile' to the 'MAINTAINERCLEANFILES' rule.
 2021-06-17 Fred Gleason <fredg@paravelsystems.com>
 	* Added a 'make deb' target.
+2021-06-17 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 2.0.0.
