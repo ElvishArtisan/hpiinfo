@@ -5,27 +5,11 @@ MANDATORY PREREQUISITES
 You will need the following installed and configured properly on your 
 system before building GlassCoder:
 
-Qt4 Toolkit, v4.6 or better (http://www.qt.io/).
+Qt5 Toolkit, v5.9 or better (http://www.qt.io/).
 
 AudioScience HPI (ASIHPI), v4.00 or later.  Advanced audio API for using
 the line of professional, high-end audio cards from AudioScience Corporation.
 Available at http://www.audioscience.com/.
-
-BUILD ENVIRONMENT
----------------------------------------------------------------------------
-Some distros may require that the CPPFLAGS and LDFLAGS
-environmental variables be set prior to running 'configure' in order for
-Qt4 to be detected properly.  Some known cases are:
-
-  CentOS/RedHat 5 (i386): export CPPFLAGS=-I/usr/lib/qt4/include
-                	  export LDFLAGS=-L/usr/lib/qt4/lib
-                	  export PATH=/usr/lib/qt4/bin:$PATH
-
-CentOS/RedHat 5 (x86_64): export CPPFLAGS=-I/usr/lib64/qt4/include
-                 	  export LDFLAGS=-L/usr/lib64/qt4/lib64
-                	  export PATH=/usr/lib64/qt4/bin:$PATH
-
-Ubuntu:                   export CPPFLAGS=-I/usr/include/qt4
 
 INSTALLATION
 Once the prerequisites are set up, building and installation of the code is

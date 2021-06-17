@@ -2,7 +2,7 @@
 ##
 ## Automake.am for src/
 ##
-## (C) Copyright 2015 Fred Gleason <fredg@paravelsystems.com>
+## (C) Copyright 2015-2021 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License version 2 as
@@ -20,8 +20,8 @@
 ##   Use automake to process this into a Makefile.in
 ##
 
-AM_CPPFLAGS = -Wall -DPREFIX=\"$(prefix)\" @QT4_CFLAGS@
-MOC = @MOC@
+AM_CPPFLAGS = -Wall -DPREFIX=\"$(prefix)\" -Wno-strict-aliasing -std=c++11 -fPIC @QT5_CFLAGS@
+MOC = @QT_MOC@
 
 # The dependency for qt's Meta Object Compiler (moc)
 moc_%.cpp:	%.h
@@ -40,7 +40,7 @@ nodist_hpiinfo_SOURCES = moc_change_mode.cpp\
                          moc_hpiinfo.cpp\
                          moc_virtdetails.cpp
 
-hpiinfo_LDADD = @QT4_LIBS@ -lhpi
+hpiinfo_LDADD = @QT5_LIBS@ -lhpi
 
 EXTRA_DIST = hpiinfo.pro
 

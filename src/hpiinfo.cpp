@@ -23,7 +23,6 @@
 #include <stdint.h>
 
 #include <QApplication>
-#include <QWindowsStyle>
 #include <QMessageBox>
 #include <QPushButton>
 #include <QTextCodec>
@@ -53,8 +52,7 @@ MainWidget::MainWidget(QWidget *parent)
   //
   // Load the command-line arguments
   //
-  CmdSwitch *cmd=new CmdSwitch(qApp->argc(),qApp->argv(),"rdhpiinfo",
-			       HPIINFO_USAGE);
+  CmdSwitch *cmd=new CmdSwitch("rdhpiinfo",HPIINFO_USAGE);
   delete cmd;
 
   //

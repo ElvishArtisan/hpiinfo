@@ -21,3 +21,5 @@
 	* Incremented the package version to 1.0.2.
 2021-06-17 Fred Gleason <fredg@paravelsystems.com>
 	* Updated the AR_GET_DISTRO() macro to use '/etc/os-release'.
+2021-06-17 Fred Gleason <fredg@paravelsystems.com>
+	* Updated the Qt Toolkit dependency to use Qt5.
