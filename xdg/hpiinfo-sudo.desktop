@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Terminal=true
+Categories=System;Application;
+Name=ASI Card Configuration
+Exec=sudo hpiinfo
+Icon=hpiinfo
+Type=Application

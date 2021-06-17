@@ -23,3 +23,6 @@
 	* Updated the AR_GET_DISTRO() macro to use '/etc/os-release'.
 2021-06-17 Fred Gleason <fredg@paravelsystems.com>
 	* Updated the Qt Toolkit dependency to use Qt5.
+2021-06-17 Fred Gleason <fredg@paravelsystems.com>
+	* Refactored the build system in 'xdg/' to deal with
+	non-consolehelper setups.

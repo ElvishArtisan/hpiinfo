@@ -76,6 +76,29 @@ AC_SUBST(ARCH,$ar_gcc_arch)
 #
 AR_GET_DISTRO()
 AC_SUBST(DISTRO,$ar_gcc_distro)
+case "$ar_distro_id" in
+     debian|ubuntu)
+       AC_MSG_NOTICE([Distro is Debian-ish])
+       DISTRO_IS_DEBIANISH=yes
+       AC_SUBST(USERMODE_PKG,"")
+       AC_SUBST(HAVE_USERMODE,"no")
+       AC_SUBST(HPIINFO_DESKTOP_FILE,"hpiinfo-sudo.desktop")
+     ;;
+
+     centos|rhel|fedora)
+       AC_MSG_NOTICE([Distro is RedHat-ish])
+       AC_SUBST(USERMODE_PKG,"usermode usermode-gtk")
+       AC_SUBST(HAVE_USERMODE,"yes")
+       AC_SUBST(HPIINFO_DESKTOP_FILE,"hpiinfo-root.desktop")
+     ;;
+
+     *)
+       AC_MSG_NOTICE([Distro is unknown])
+       AC_SUBST(USERMODE_PKG,"")
+       AC_SUBST(HAVE_USERMODE,"no")
+       AC_SUBST(HPIINFO_DESKTOP_FILE,"hpiinfo.desktop")
+     ;;
+esac
 
 #
 # Configure RPM Build
@@ -98,9 +121,11 @@ AC_CONFIG_FILES([ \
     icons/Makefile \
     src/Makefile \
     xdg/Makefile \
+    xdg/install_usermode.sh \
     hpiinfo.spec \
     Makefile ])
 AC_OUTPUT()
+chmod 755 xdg/install_usermode.sh
 
 AC_MSG_NOTICE()
 AC_MSG_NOTICE(Now enter 'make' to build the software.)

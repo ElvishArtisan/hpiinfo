@@ -34,7 +34,7 @@ rpm:	dist
 
 EXTRA_DIST = hpiinfo.spec.in\
              autogen.sh\
-             get_distro.sh\
+             get_distro.pl\
              get_target.sh\
              PACKAGE_VERSION
 

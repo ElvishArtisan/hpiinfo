@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# install_usermode.sh
+#
+#  Install support files for usermode wrapper
+#
+#   (C) Copyright 2021 Fred Gleason <fredg@paravelsystems.com>
+#
+#   This program is free software; you can redistribute it and/or modify
+#   it under the terms of the GNU General Public License version 2 as
+#   published by the Free Software Foundation.
+#
+#   This program is distributed in the hope that it will be useful,
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#   GNU General Public License for more details.
+#
+#   You should have received a copy of the GNU General Public
+#   License along with this program; if not, write to the Free Software
+#   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+
+if test "$#" -eq 3 ; then
+    ACTION=$1
+    DESTDIR=$2
+    PREFIX=$3
+else
+    ACTION=$1
+    PREFIX=$2
+fi
+
+if test "@HAVE_USERMODE@" != "yes" ; then
+    exit 0
+fi
+
+if test "$ACTION" = "install" ; then
+    mkdir -p $DESTDIR/etc/pam.d
+    cp hpiinfo-root-pam $DESTDIR/etc/pam.d/hpiinfo-root
+    mkdir -p $DESTDIR/etc/security/console.apps
+    cp hpiinfo-root-consolehelper $DESTDIR/etc/security/console.apps/hpiinfo-root
+    mkdir -p $DESTDIR$PREFIX/bin
+    rm -f $DESTDIR$PREFIX/bin/hpiinfo-root
+    ln -s /usr/bin/consolehelper $DESTDIR$PREFIX/bin/hpiinfo-root
+fi
+
+if test "$ACTION" = "uninstall" ; then
+    rm -f $DESTDIR/etc/pam.d/hpiinfo-root
+    rm -f $DESTDIR/etc/security/console.apps/hpiinfo-root
+    rm -f $DESTDIR$PREFIX/bin/hpiinfo-root
+fi
+
