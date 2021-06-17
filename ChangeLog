@@ -28,3 +28,5 @@
 	non-consolehelper setups.
 2021-06-17 Fred Gleason <fredg@paravelsystems.com>
 	* Added 'compile' to the 'MAINTAINERCLEANFILES' rule.
+2021-06-17 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'make deb' target.

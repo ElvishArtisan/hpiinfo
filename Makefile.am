@@ -4,7 +4,7 @@
 ##
 ## Use automake to process this into a Makefile.in
 ##
-##   (C) Copyright 2015 Fred Gleason <fredg@paravelsystems.com>
+##   (C) Copyright 2015-2021 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   This program is free software; you can redistribute it and/or modify
 ##   it under the terms of the GNU General Public License version 2 as
@@ -20,9 +20,13 @@
 ##   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 ##
 
-SUBDIRS = icons\
+SUBDIRS = debian\
+          icons\
           src\
           xdg
+
+deb:	dist
+	./build_debs.sh
 
 rpm:	dist
 	cp hpiinfo-$(VERSION).tar.gz $(HOME)/rpmbuild/SOURCES/
@@ -32,23 +36,30 @@ rpm:	dist
 	rm $(HOME)/rpmbuild/SOURCES/hpiinfo-$(VERSION).tar.gz
 	rm -rf $(HOME)/rpmbuild/BUILD/hpiinfo-$(VERSION)
 
-EXTRA_DIST = hpiinfo.spec.in\
-             autogen.sh\
+EXTRA_DIST = autogen.sh\
+             build_debs.sh.in\
              get_distro.pl\
              get_target.sh\
+             hpiinfo.spec.in\
              PACKAGE_VERSION
 
 CLEANFILES = *~\
+             *.buildinfo\
+             *.changes\
+             *.ddeb\
              *.deb\
+             *.dsc\
              *.mo\
              *.rpm\
              *.tar.gz\
+             *.tar.xz\
              *.tgz\
              *.zip
 
-DISTCLEANFILES = hpiinfo.spec\
+DISTCLEANFILES = build_debs.sh\
                  config.guess\
                  config.sub\
+                 hpiinfo.spec\
                  ltmain.sh
 
 MAINTAINERCLEANFILES = *~\

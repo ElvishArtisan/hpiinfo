@@ -118,13 +118,17 @@ else
 fi 
 
 AC_CONFIG_FILES([ \
+    debian/source/Makefile \
+    debian/Makefile \
     icons/Makefile \
     src/Makefile \
     xdg/Makefile \
     xdg/install_usermode.sh \
     hpiinfo.spec \
+    build_debs.sh \
     Makefile ])
 AC_OUTPUT()
+chmod 755 build_debs.sh
 chmod 755 xdg/install_usermode.sh
 
 AC_MSG_NOTICE()
