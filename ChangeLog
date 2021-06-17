@@ -19,3 +19,5 @@
 2018-03-20 Fred Gleason <fredg@paravelsystems.com>
 	* Updated 'NEWS'.
 	* Incremented the package version to 1.0.2.
+2021-06-17 Fred Gleason <fredg@paravelsystems.com>
+	* Updated the AR_GET_DISTRO() macro to use '/etc/os-release'.

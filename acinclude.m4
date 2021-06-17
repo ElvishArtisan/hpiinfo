@@ -38,19 +38,29 @@ AC_DEFUN([AR_GCC_TARGET],[AC_REQUIRE([AC_PROG_CC])]
   ]
 )
 
-dnl AR_GET_DISTRO()
-dnl
-dnl Try to determine the name and version of the distribution running
-dnl on the host machine, based on entries in '/etc/'.
-dnl The following variables are set:
-dnl   $ar_distro_name = Distribution Name (SuSE, Debian, etc)
-dnl   $ar_distro_version = Distribution Version (10.3, 3.1, etc)
-dnl
+# AR_GET_DISTRO()
+#
+# Try to determine the name and version of the distribution running
+# on the host machine, based on entries in '/etc/'.
+# The following variables are set:
+#   $ar_distro_name = Distribution Name (SuSE, Debian, etc)
+#   $ar_distro_version = Distribution Version (10.3, 3.1, etc)
+#   $ar_distro_major = Distribution Version Major Number (10, 3, etc)
+#   $ar_distro_minor = Distribution Version Minor Number (3, 1, etc)
+#   $ar_distro_pretty_name = Full Distribution Name (Ubuntu 20.04.2 LTS, etc)
+#   $ar_distro_id = All lowercase identifier (ubuntu, debian, centos, etc)
+#   $ar_distro_id_like = Identifier(s) of similar distros (rhel fedora, etc)
+#
 AC_DEFUN([AR_GET_DISTRO],[]
   [
   AC_MSG_CHECKING(distribution)
-  ar_distro_name=$(./get_distro.sh NAME $AWK)
-  ar_distro_version=$(./get_distro.sh VERSION $AWK)
-  AC_MSG_RESULT([$ar_distro_name $ar_distro_version])
+  ar_distro_name=$(./get_distro.pl NAME)
+  ar_distro_version=$(./get_distro.pl VERSION)
+  ar_distro_major=$(./get_distro.pl MAJOR)
+  ar_distro_minor=$(./get_distro.pl MINOR)
+  ar_distro_pretty_name=$(./get_distro.pl PRETTY_NAME)
+  ar_distro_id=$(./get_distro.pl ID)
+  ar_distro_id_like=$(./get_distro.pl ID_LIKE)
+  AC_MSG_RESULT([$ar_distro_pretty_name $ar_distro_version])
   ]
 )
