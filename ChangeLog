@@ -32,3 +32,5 @@
 	* Added a 'make deb' target.
 2021-06-17 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 2.0.0.
+2021-09-30 Fred Gleason <fredg@paravelsystems.com>
+	* Added RockyLinux to the list of supported distros.

@@ -85,7 +85,7 @@ case "$ar_distro_id" in
        AC_SUBST(HPIINFO_DESKTOP_FILE,"hpiinfo-sudo.desktop")
      ;;
 
-     centos|rhel|fedora)
+     centos|rhel|fedora|rocky)
        AC_MSG_NOTICE([Distro is RedHat-ish])
        AC_SUBST(USERMODE_PKG,"usermode usermode-gtk")
        AC_SUBST(HAVE_USERMODE,"yes")
