@@ -77,11 +77,11 @@ AC_SUBST(ARCH,$ar_gcc_arch)
 AR_GET_DISTRO()
 AC_SUBST(DISTRO,$ar_gcc_distro)
 case "$ar_distro_id" in
-     debian|ubuntu)
+     debian|linuxmint|ubuntu)
        AC_MSG_NOTICE([Distro is Debian-ish])
        DISTRO_IS_DEBIANISH=yes
        AC_SUBST(USERMODE_PKG,"")
-       AC_SUBST(HAVE_USERMODE,"no")
+       AC_SUBST(HAVE_USERMODE,"yes")
        AC_SUBST(HPIINFO_DESKTOP_FILE,"hpiinfo-sudo.desktop")
      ;;
 
