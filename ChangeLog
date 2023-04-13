@@ -37,3 +37,5 @@
 2023-04-13 Fred Gleason <fredg@paravelsystems.com>
 	* Added Linux Mint to the list of supported distros.
 	* Enabled usermode authentication for Debian-ish distros.
+2023-04-13 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 2.0.1.

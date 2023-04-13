@@ -1,6 +1,13 @@
 The NEWS file for the HpiInfo package.
 
 -------------------------------------------------------------------------------
+v2.0.1 - 13 April 2023
+
+Changes:
+   Enabled 'usermode' priviledge escalation to allow starting from menu
+   on Debian-ish distros.
+
+-------------------------------------------------------------------------------
 v2.0.0 - 17 June 2021
 
 Changes:
