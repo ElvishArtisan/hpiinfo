@@ -42,22 +42,14 @@ AC_PROG_CXX
 AC_LANG(C++)
 
 #
-# Check for Qt (Mandatory)
+# Check for Qt6 (Mandatory)
 #
-PKG_CHECK_MODULES(QT5,Qt5Core Qt5Widgets Qt5Gui Qt5Network,,[AC_MSG_ERROR([*** Qt5 not found ***])])
-AC_CHECK_PROG(MOC_NAME,moc-qt5,[moc-qt5],[moc])
-AC_SUBST(QT_MOC,$MOC_NAME)
-
-AC_CHECK_PROG(LUPDATE_NAME,lupdate-qt5,[lupdate-qt5],[lupdate])
+AQ_FIND_QT6(QT6,Core Gui Widgets Network,[],[AC_MSG_ERROR([*** Qt6 not found ***])])
+AC_CHECK_PROG(LUPDATE_NAME,lupdate-qt6,[lupdate-qt6],[lupdate])
 AC_SUBST(QT_LUPDATE,$LUPDATE_NAME)
 
-AC_CHECK_PROG(LRELEASE_NAME,lrelease-qt5,[lrelease-qt5],[lrelease])
+AC_CHECK_PROG(LRELEASE_NAME,lrelease-qt6,[lrelease-qt6],[lrelease])
 AC_SUBST(QT_LRELEASE,$LRELEASE_NAME)
-
-
-#PKG_CHECK_MODULES(QT4,QtGui QtCore QtNetwork,[],[AC_MSG_ERROR([*** Qt4 not found ***])])
-#AC_CHECK_PROG(MOC_NAME,moc-qt4,[moc-qt4],[moc])
-#AC_SUBST(MOC,$MOC_NAME)
 
 #
 # Check for AudioScience HPI
