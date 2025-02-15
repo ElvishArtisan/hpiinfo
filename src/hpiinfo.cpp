@@ -79,7 +79,7 @@ MainWidget::MainWidget(QWidget *parent)
   QLabel *label=new QLabel(tr("HPI Version:"),this);
   label->setGeometry(10,10,85,20);
   label->setFont(label_font);
-  label=new QLabel(QString().sprintf("%d.%02d.%02d",
+  label=new QLabel(QString::asprintf("%d.%02d.%02d",
 				     (unsigned)((hpi_version>>16)&0xffff),
 				     (unsigned)((hpi_version>>8)&0xff),
 				     (unsigned)hpi_version&0xff),this);
@@ -254,18 +254,18 @@ void MainWidget::nameActivatedData(int n)
   QString str;
   int card=info_name_box->itemData(info_name_box->currentIndex()).toInt();
   info_index_label->
-    setText(QString().sprintf("%u",(unsigned)hpi_indexes[card]+1));
+    setText(QString::asprintf("%u",(unsigned)hpi_indexes[card]+1));
   info_serial_label->
-    setText(QString().sprintf("%u",(unsigned)hpi_serial[card]));
+    setText(QString::asprintf("%u",(unsigned)hpi_serial[card]));
   info_istreams_label->
-    setText(QString().sprintf("%d",hpi_istreams[card]));
+    setText(QString::asprintf("%d",hpi_istreams[card]));
   info_ostreams_label->
-    setText(QString().sprintf("%d",hpi_ostreams[card]));
-  info_dsp_label->setText(QString().sprintf("%d.%d",
+    setText(QString::asprintf("%d",hpi_ostreams[card]));
+  info_dsp_label->setText(QString::asprintf("%d.%d",
 					    hpi_card_version[card]>>13,
 					    (hpi_card_version[card]>>7)&63));
   info_adapter_label->
-    setText(QString().sprintf("%c%d",
+    setText(QString::asprintf("%c%d",
 			      ((hpi_card_version[card]>>3)&15)+'A',
 			      hpi_card_version[card]&7));
   switch(hpi_mode[card]) {
@@ -372,7 +372,7 @@ void MainWidget::changeModeData()
   else {
     HPI_GetErrorText(hpi_err,hpi_text);
     str=QString(tr("HPI Error"));
-    QMessageBox::warning(this,tr("HPIInfo"),str+QString().sprintf(" %d:\n\"",hpi_err)+hpi_text+"\"");
+    QMessageBox::warning(this,tr("HPIInfo"),str+QString::asprintf(" %d:\n\"",hpi_err)+hpi_text+"\"");
   }
   hpi_err=HPI_AdapterClose(NULL,card);
 }
@@ -398,7 +398,7 @@ void MainWidget::updateDspUtilization()
   if(HpiErr(HPI_ProfileGetUtilization(NULL,
 				      hpi_profile[info_name_box->currentIndex()],
 				      &util))==0) {
-    info_utilization_edit->setText(QString().sprintf("%5.1lf%%",
+    info_utilization_edit->setText(QString::asprintf("%5.1lf%%",
 						     (double)util/100.0));
     info_utilization_label->setEnabled(true);
     info_utilization_edit->setEnabled(true);
@@ -429,7 +429,7 @@ void MainWidget::LoadAdapters()
     hpi_mode[i]=0;
     if(hpi_type[i]!=0) {
       info_name_box->insertItem(info_name_box->count(),
-				QString().sprintf("AudioScience %X [%d]",
+				QString::asprintf("AudioScience %X [%d]",
 						  hpi_type[i],i+1),info_name_box->count());
       HpiErr(HPI_AdapterOpen(NULL,hpi_indexes[i]),"HPI_AdapterOpen");
       HpiErr(HPI_AdapterGetInfo(NULL,hpi_indexes[i],&hpi_ostreams[i],&hpi_istreams[i],

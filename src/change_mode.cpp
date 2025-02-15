@@ -52,7 +52,7 @@ ChangeMode::ChangeMode(unsigned short card,unsigned short type,int mode,
   //
   // Adapter Type
   //
-  QLabel *label=new QLabel(QString().sprintf("AudioScience %X",type),this);
+  QLabel *label=new QLabel(QString::asprintf("AudioScience %X",type),this);
   label->setGeometry(10,10,sizeHint().width()-20,15);
   label->setFont(label_font);
   label->setAlignment(Qt::AlignCenter);
@@ -131,7 +131,7 @@ ChangeMode::ChangeMode(unsigned short card,unsigned short type,int mode,
       default:
 	str=QString(tr("Unknown"));
 	change_mode_box->insertItem(-1,"  "+str+
-				    QString().sprintf("[MODE=%u]\n",i),i);
+				    QString::asprintf("[MODE=%u]\n",i),i);
 	break;
       }
     }

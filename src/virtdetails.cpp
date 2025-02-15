@@ -180,16 +180,16 @@ void VirtDetails::updateProfileData()
 
   if(HPI_ProfileGetUtilization(NULL,virt_profile,&utilization)==0) {
     virt_utilization_edit->
-      setText(QString().sprintf("%5.1lf%%",(double)utilization/100.0));
+      setText(QString::asprintf("%5.1lf%%",(double)utilization/100.0));
   }
   if(HPI_ProfileGet(NULL,virt_profile,virt_profile_box->currentIndex(),
 		    &interval,&total_ticks,&call_count,&max_ticks,
 		    &ticks_per_ms)==0) {
-    virt_interval_edit->setText(QString().sprintf("%u sec",interval));
-    virt_total_ticks_edit->setText(QString().sprintf("%u",total_ticks));
-    virt_call_count_edit->setText(QString().sprintf("%u",call_count));
-    virt_max_ticks_edit->setText(QString().sprintf("%u",max_ticks));
-    virt_ticks_per_ms_edit->setText(QString().sprintf("%u",ticks_per_ms));
+    virt_interval_edit->setText(QString::asprintf("%u sec",interval));
+    virt_total_ticks_edit->setText(QString::asprintf("%u",total_ticks));
+    virt_call_count_edit->setText(QString::asprintf("%u",call_count));
+    virt_max_ticks_edit->setText(QString::asprintf("%u",max_ticks));
+    virt_ticks_per_ms_edit->setText(QString::asprintf("%u",ticks_per_ms));
   }
 }
 

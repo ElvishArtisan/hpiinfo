@@ -114,7 +114,7 @@ bool CmdSwitch::addOverlay(const QString &filename)
   }
   while(fgets(line,1024,f)!=NULL) {
     bool unique=true;
-    QStringList f0=QString(line).trimmed().split("=",QString::KeepEmptyParts);
+    QStringList f0=QString(line).trimmed().split("=",Qt::KeepEmptyParts);
     if((f0[0].length()>0)&&(f0[0].left(1)!="#")) {
       for(unsigned i=0;i<switch_keys.size();i++) {
 	if(f0[0]==switch_keys[i]) {
