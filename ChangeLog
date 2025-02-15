@@ -43,3 +43,5 @@
 	* Cleaned up compiler warnings.
 2025-02-15 Fred Gleason <fredg@paravelsystems.com>
 	* Upgraded Qt5 to Qt6.
+2025-02-15 Fred Gleason <fredg@paravelsystems.com>
+	* Cleaned up autotools warning in 'configure.ac'.

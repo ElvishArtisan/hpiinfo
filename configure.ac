@@ -54,7 +54,7 @@ AC_SUBST(QT_LRELEASE,$LRELEASE_NAME)
 #
 # Check for AudioScience HPI
 #
-AC_CHECK_HEADER(asihpi/hpi.h,[],[AC_ERROR([*** HPI not found ***])])
+AC_CHECK_HEADER(asihpi/hpi.h,[],[AC_MSG_ERROR([*** HPI not found ***])])
 
 #
 # Determine the target architecture
