@@ -52,3 +52,5 @@
 2025-02-17 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed a bug that caused hpiinfo-cmd(1) to be installed with the
 	incorrect name.
+2025-02-17 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 3.0.0.

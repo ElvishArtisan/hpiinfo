@@ -1,6 +1,15 @@
 The NEWS file for the HpiInfo package.
 
 -------------------------------------------------------------------------------
+v3.0.0 - 17 February 2025
+
+Changes:
+   Command-line Utility. Added a hpiinfo-cmd(1) utility to allow basic
+   adapter information to be accessed from user scripts.
+
+   Qt Toolkit. Updated the required major Qt version from Qt5 to Qt6.
+
+-------------------------------------------------------------------------------
 v2.0.1 - 13 April 2023
 
 Changes:
