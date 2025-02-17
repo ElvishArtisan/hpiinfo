@@ -32,7 +32,7 @@
 #include "change_mode.h"
 #include "virtdetails.h"
 
-#include "../icons/hpiinfo-16x16.xpm"
+#include "../../icons/hpiinfo-16x16.xpm"
 
 MainWidget::MainWidget(QWidget *parent)
   :QWidget(parent)

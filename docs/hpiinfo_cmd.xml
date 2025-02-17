@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<refentry id="stdin" xmlns="http://docbook.org/ns/docbook" version="5.0">
+  <!--
+      Header
+  -->
+  <refmeta>
+    <refentrytitle>hpiinfo-cmd</refentrytitle>
+    <manvolnum>1</manvolnum>
+    <refmiscinfo class='source'>February 2025</refmiscinfo>
+    <refmiscinfo class='manual'>Linux Audio Manual</refmiscinfo>
+  </refmeta>
+  <refnamediv>
+    <refname>hpiinfo-cmd</refname>
+    <refpurpose>Info lookup tool for AudioScience audio adapters</refpurpose>
+  </refnamediv>
+  <info>
+    <author>
+      <personname>
+	<firstname>Fred</firstname>
+	<surname>Gleason</surname>
+	<email>fredg@paravelsystems.com</email>
+      </personname>
+      <contrib>Application Author</contrib>
+    </author>
+  </info>
+
+  <!--
+      Body
+  -->
+  <refsynopsisdiv id='synopsis'>
+    <cmdsynopsis>
+      <command>hpiinfo-cmd</command>
+      <arg choice="opt">--index=<replaceable>index-num</replaceable></arg>
+      <arg choice="opt">--format=<replaceable>fmt-str</replaceable></arg>
+      <sbr/>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+
+  <refsect1 id='description'><title>Description</title>
+  <para>
+    <command>hpiinfo-cmd</command><manvolnum>1</manvolnum>
+    is a command-line reference tool for interrogating audio adapters
+    manufactured by AudioScience. When invoked without any arguments,
+    <command>hpiinfo-cmd</command><manvolnum>1</manvolnum> will scan the
+    system for AudioScience audio adapters using the HPI interface and
+    print a single line of information for each adapter found. Both the
+    specific adapters chosen as well as the details reported can be modified
+    by use of the <option>--index</option> and <option>--format</option>
+    options as specified below.
+  </para>
+</refsect1>
+
+<refsect1 id='options'><title>Options</title>
+  <variablelist>
+    <varlistentry>
+      <term>
+	<option>--format=<replaceable>fmt-string</replaceable></option>
+      </term>
+      <listitem>
+	<para>
+	  For each audio adapter selected, print
+	  <replaceable>fmt-string</replaceable> followed by a newline.
+	  <replaceable>fmt-string</replaceable> can contain zero or more
+	  wildcard sub-strings, which will be replaceable by information read
+	  from the selected adapter.
+	</para>
+	<para>
+	  The following wildcard strings are recognized:
+	</para>
+	<variablelist>
+	  <varlistentry>
+	    <term><userinput>%DSP_VERSION%</userinput></term>
+	    <listitem>
+	      <para>
+		The version of the DSP subsystem in use, in the form
+		<computeroutput>1.20</computeroutput>.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%HARDWARE_VERSION%</userinput></term>
+	    <listitem>
+	      <para>
+		The version of the physical hardware in use, in the form
+		<computeroutput>A1</computeroutput>.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%HPI_VERSION%</userinput></term>
+	    <listitem>
+	      <para>
+		The version of the HPI driver in use, in the form
+		<computeroutput>1.2.3</computeroutput>.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%INDEX%</userinput></term>
+	    <listitem>
+	      <para>
+		The index number of the adapter.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%INPUT_STREAMS%</userinput></term>
+	    <listitem>
+	      <para>
+		The number of available input streams in the current mode
+		of operations.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%MODEL%</userinput></term>
+	    <listitem>
+	      <para>
+		The model number of the adapter. Typically a four
+		digit number.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%NAME%</userinput></term>
+	    <listitem>
+	      <para>
+		The name of the adapter. Suitable for displaying in
+		a user interface.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%OUTPUT_STREAMS%</userinput></term>
+	    <listitem>
+	      <para>
+		The number of available output streams in the current
+		operating mode.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	  <varlistentry>
+	    <term><userinput>%SERIAL%</userinput></term>
+	    <listitem>
+	      <para>
+		The serial number of the adaptor.
+	      </para>
+	    </listitem>
+	  </varlistentry>
+	</variablelist>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
+      <term>
+	<option>--index=<replaceable>index-num</replaceable></option>
+      </term>
+      <listitem>
+	<para>
+	  Include the adapter at index number
+	  <replaceable>index-num</replaceable>. This option may be given
+	  multiple times. Valid possible index numbers lie in the range of
+	  <userinput>1</userinput> through <userinput>20</userinput>
+	  inclusive. Index numbers are customarily set by means of a jumper
+	  or rotary encoder located on the top edge of the physical card.
+	</para>
+	<para>
+	  If no <option>--index</option> option(s) are
+	  specified, then all adapters detected will be included in the
+	  output.
+	</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+</refsect1>
+
+<refsect1 id='author'>
+  <title>Author</title>
+  <para>
+    Fred Gleason &lt;fredg@paravelsystems.com&gt;
+  </para>
+</refsect1>
+
+<refsect1 id='see_also'>
+  <title>See Also</title>
+  <para>
+    AudioScience HPI Documentation, https://www.audioscience.com/
+  </para>
+</refsect1>
+</refentry>
+

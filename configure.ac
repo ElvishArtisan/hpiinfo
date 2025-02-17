@@ -42,6 +42,11 @@ AC_PROG_CXX
 AC_LANG(C++)
 
 #
+# Option Switches
+#
+AC_ARG_ENABLE(docbook,[  --disable-docbook       disable building of documentation],[DOCBOOK_DISABLED=yes],[])
+
+#
 # Check for Qt6 (Mandatory)
 #
 AQ_FIND_QT6(QT6,Core Gui Widgets Network,[],[AC_MSG_ERROR([*** Qt6 not found ***])])
@@ -55,6 +60,14 @@ AC_SUBST(QT_LRELEASE,$LRELEASE_NAME)
 # Check for AudioScience HPI
 #
 AC_CHECK_HEADER(asihpi/hpi.h,[],[AC_MSG_ERROR([*** HPI not found ***])])
+
+#
+# Configure documentation build
+#
+if test -z $DOCBOOK_DISABLED ; then
+  USING_DOCBOOK=yes
+fi
+AM_CONDITIONAL([DOCBOOK_AM], [test "$USING_DOCBOOK" = yes])
 
 #
 # Determine the target architecture
@@ -112,7 +125,10 @@ fi
 AC_CONFIG_FILES([ \
     debian/source/Makefile \
     debian/Makefile \
+    docs/Makefile \
     icons/Makefile \
+    src/hpiinfo/Makefile \
+    src/hpiinfo_cmd/Makefile \
     src/Makefile \
     xdg/Makefile \
     xdg/install_usermode.sh \

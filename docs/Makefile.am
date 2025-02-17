@@ -1,13 +1,12 @@
 ## Makefile.am
 ##
-## Makefile.am for hpiinfo src/
+## docs/Makefile.am for hpiinfo
 ##
 ##   (C) Copyright 2025 Fred Gleason <fredg@paravelsystems.com>
 ##
 ##   This program is free software; you can redistribute it and/or modify
-##   it under the terms of the GNU General Public License as
-##   published by the Free Software Foundation; either version 2 of
-##   the License, or (at your option) any later version.
+##   it under the terms of the GNU General Public License version 2 as
+##   published by the Free Software Foundation.
 ##
 ##   This program is distributed in the hope that it will be useful,
 ##   but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,20 +19,34 @@
 ##
 ## Use automake to process this into a Makefile.in
 
-SUBDIRS = hpiinfo\
-          hpiinfo_cmd
+##
+## Build Dependencies
+##
+%.html:	%.xml
+	xsltproc -o $@ $(DOCBOOK_STYLESHEETS)/xhtml/docbook.xsl $<
 
-CLEANFILES = *~\
-             *.idb\
-             *ilk\
-             *.obj\
-             *.pdb\
-             *.qm\
-             moc_*
+%.pdf:	%.xml
+	xsltproc $(DOCBOOK_STYLESHEETS)/fo/docbook.xsl $< | fop - -pdf $@
 
+%.1:	%.xml
+	xsltproc $(DOCBOOK_STYLESHEETS)/manpages/docbook.xsl $<
+
+%.8:	%.xml
+	xsltproc $(DOCBOOK_STYLESHEETS)/manpages/docbook.xsl $<
+
+all-local:	hpiinfo_cmd.1
+
+man_MANS = hpiinfo_cmd.1
+
+EXTRA_DIST = hpiinfo_cmd.1\
+             hpiinfo_cmd.xml
+
+CLEANFILES = *~
 MAINTAINERCLEANFILES = *~\
-                       *.tar.gz\
+                       *.1\
+                       *.8\
+                       *.html\
+                       *.pdf\
                        aclocal.m4\
                        configure\
-                       Makefile.in\
-                       moc_*
+                       Makefile.in
