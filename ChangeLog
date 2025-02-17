@@ -47,3 +47,5 @@
 	* Cleaned up autotools warning in 'configure.ac'.
 2025-02-17 Fred Gleason <fredg@paravelsystems.com>
 	* Added a hpiinfo-cmd(1) utility.
+2025-02-17 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug that broke generation of the hpiinfo-cmd(1) man page.

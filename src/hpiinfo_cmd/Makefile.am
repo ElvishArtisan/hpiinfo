@@ -27,7 +27,7 @@ MOC = @QT6_MOC@
 moc_%.cpp:	%.h
 	$(MOC) $< -o $@
 
-sbin_PROGRAMS = hpiinfo_cmd
+bin_PROGRAMS = hpiinfo_cmd
 
 dist_hpiinfo_cmd_SOURCES = cmdswitch.cpp cmdswitch.h\
                            hpiinfo_cmd.cpp hpiinfo_cmd.h

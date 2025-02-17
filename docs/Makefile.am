@@ -34,12 +34,12 @@
 %.8:	%.xml
 	xsltproc $(DOCBOOK_STYLESHEETS)/manpages/docbook.xsl $<
 
-all-local:	hpiinfo_cmd.1
+all-local:	hpiinfo-cmd.1
 
-man_MANS = hpiinfo_cmd.1
+man_MANS = hpiinfo-cmd.1
 
-EXTRA_DIST = hpiinfo_cmd.1\
-             hpiinfo_cmd.xml
+EXTRA_DIST = hpiinfo-cmd.1\
+             hpiinfo-cmd.xml
 
 CLEANFILES = *~
 MAINTAINERCLEANFILES = *~\

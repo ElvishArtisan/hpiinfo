@@ -9,6 +9,7 @@
 *.spec
 *.tar.gz
 *.tar.xz
+*.1
 aclocal.m4
 autom4te.cache
 build_debs.sh
@@ -24,4 +25,5 @@ missing
 moc_*
 debian/changelog
 src/hpiinfo
+src/hpiinfo_cmd/hpiinfo_cmd
 xdg/install_usermode.sh
