@@ -49,3 +49,6 @@
 	* Added a hpiinfo-cmd(1) utility.
 2025-02-17 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed a bug that broke generation of the hpiinfo-cmd(1) man page.
+2025-02-17 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug that caused hpiinfo-cmd(1) to be installed with the
+	incorrect name.
