@@ -59,3 +59,6 @@
 	to be omitted.
 2025-02-19 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 3.0.1.
+2025-02-19 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in hpiinfo-cmd(1) that caused adapters to be
+	misidentified when using non-contiguous index values.

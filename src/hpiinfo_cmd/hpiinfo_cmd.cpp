@@ -107,10 +107,12 @@ void MainObject::LoadAdapters()
   HpiErr(HPI_SubSysGetNumAdapters(NULL,&hpi_adapter_quantity),
 	 "HPI_SubSysGetNumAdapters");
   for(int i=0;i<hpi_adapter_quantity;i++) {
-    HpiErr(HPI_SubSysGetAdapter(NULL,i,&index,hpi_type+i),
+    uint16_t type=0;
+    HpiErr(HPI_SubSysGetAdapter(NULL,i,&index,&type),
 	   "HPI_SubSysGetAdapter");
-    hpi_name[index]=QString::asprintf("AudioScience %X [%d]",hpi_type[i],i+1);
-    if(hpi_type[i]!=0) {
+    hpi_type[index]=type;
+    hpi_name[index]=QString::asprintf("AudioScience %X [%d]",hpi_type[index],i+1);
+    if(hpi_type[index]!=0) {
       HpiErr(HPI_AdapterOpen(NULL,index),"HPI_AdapterOpen");
       HpiErr(HPI_AdapterGetInfo(NULL,index,&hpi_ostreams[index],
 				&hpi_istreams[index],

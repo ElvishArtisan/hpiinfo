@@ -25,5 +25,5 @@ missing
 moc_*
 debian/changelog
 src/hpiinfo
-src/hpiinfo_cmd/hpiinfo_cmd
+src/hpiinfo_cmd/hpiinfo-cmd
 xdg/install_usermode.sh
