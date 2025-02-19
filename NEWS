@@ -1,6 +1,12 @@
 The NEWS file for the HpiInfo package.
 
 -------------------------------------------------------------------------------
+v3.0.3 - 19 February 2025
+
+Changes:
+   Bugfix. Added a missing dependency for Qt platform dependencies.
+
+-------------------------------------------------------------------------------
 v3.0.2 - 19 February 2025
 
 Changes:
