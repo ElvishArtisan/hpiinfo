@@ -54,3 +54,6 @@
 	incorrect name.
 2025-02-17 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 3.0.0.
+2025-02-19 Fred Gleason <fredg@paravelsystems.com>
+	* Fixed a bug in the DEB package that caused dependency information
+	to be omitted.
