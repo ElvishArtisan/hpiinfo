@@ -64,3 +64,5 @@
 	misidentified when using non-contiguous index values.
 2025-02-19 Fred Gleason <fredg@paravelsystems.com>
 	* Removed superfluous variables from hpiinfo-cmd(1).
+2025-02-19 Fred Gleason <fredg@paravelsystems.com>
+	* Incremented the package version to 3.0.2.

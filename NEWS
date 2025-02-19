@@ -1,6 +1,13 @@
 The NEWS file for the HpiInfo package.
 
 -------------------------------------------------------------------------------
+v3.0.2 - 19 February 2025
+
+Changes:
+   Bugfix. Fixed a bug in hpiinfo-cmd(1) that caused adapters to be
+   misidentified when using non-contiguous index values.
+
+-------------------------------------------------------------------------------
 v3.0.1 - 19 February 2025
 
 Changes:
