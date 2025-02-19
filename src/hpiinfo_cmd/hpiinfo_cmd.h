@@ -46,7 +46,6 @@ class MainObject : public QObject
   uint32_t hpi_version;
   int hpi_adapter_quantity;
   QString hpi_name[HPI_MAX_ADAPTERS];
-  //  uint32_t hpi_indexes[HPI_MAX_ADAPTERS];
   uint16_t hpi_ostreams[HPI_MAX_ADAPTERS];
   uint16_t hpi_istreams[HPI_MAX_ADAPTERS];
   uint16_t hpi_card_version[HPI_MAX_ADAPTERS];

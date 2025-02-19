@@ -62,3 +62,5 @@
 2025-02-19 Fred Gleason <fredg@paravelsystems.com>
 	* Fixed a bug in hpiinfo-cmd(1) that caused adapters to be
 	misidentified when using non-contiguous index values.
+2025-02-19 Fred Gleason <fredg@paravelsystems.com>
+	* Removed superfluous variables from hpiinfo-cmd(1).
