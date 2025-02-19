@@ -1,6 +1,12 @@
 The NEWS file for the HpiInfo package.
 
 -------------------------------------------------------------------------------
+v3.0.1 - 19 February 2025
+
+Changes:
+   Bugfix. Added missing dependency info to the DEB package.
+
+-------------------------------------------------------------------------------
 v3.0.0 - 17 February 2025
 
 Changes:
