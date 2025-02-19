@@ -66,3 +66,5 @@
 	* Removed superfluous variables from hpiinfo-cmd(1).
 2025-02-19 Fred Gleason <fredg@paravelsystems.com>
 	* Incremented the package version to 3.0.2.
+2025-02-19 Fred Gleason <fredg@paravelsystems.com>
+	* Added a 'qt6-qpa-plugins' dependency to the DEB package.

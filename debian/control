@@ -8,7 +8,7 @@ Homepage: https://github.com/ElvishArtisan/hpiinfo
 
 Package: hpiinfo
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, qt6-qpa-plugins
 Description: Configuration applet for AudioScience audio adapters
  An applet for the configuration and monitoring of AudioScience's
  [http://www.audioscience.com] line of high-end audio adapters (sound cards).
